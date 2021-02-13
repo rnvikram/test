@@ -41,7 +41,7 @@ def home():
     posts = c.fetchall()
     Asset_requests=(posts[0]['count(NARID)'])
     data=[]
-    data.append({"name":"Assets owned","value":asset_count})
+    data.append({"name":"Assets bac owned","value":asset_count})
     data.append({"name":"Support requests","value":ticket_count})
     data.append({"name":"Assets Requested","value":Asset_requests})
     data.append({"name":"Team Support requests","value":15})
