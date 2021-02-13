@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+        <title>Employee help desk - {{ title }}</title>
+    {% else %}
+        <title>Employee help desk</title>
+    {% endif %}
+</head>
+<body>
+    <!--Divided into columns Left displaying an image and right displaying the form-->
+    <main role="main" class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <div class="content-section">
+                  <img src="https://thegoodguys.sirv.com/products/50045090/50045090_608247.PNG?scale.height=505&scale.width=773&canvas.height=505&canvas.width=773&canvas.opacity=0&format=png&png.optimize=true" alt="Simply Easy Learning" width="400"
+                  height="500">
+                  </ul>
+                </p>
+              </div>
+            </div>
+        <div class="col-md-8">
+       
+          {% block content %}{% endblock %}
+        </div>
+        
+      </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<style>
+.col-md-4{
+padding:0
+
+}
+.col-md-8{
+
+  padding:0
+}
+body{
+  margin-top:0;
+  background:#2e77d2
+}
+.content-section{
+  padding-top:120px;
+  height:800px
+}
+</style>  

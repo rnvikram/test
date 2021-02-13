@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    
+       
+            <title>Serach</title>
+        
+    </head>
+    <body>                  
+        <div class="card-body">
+            <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Activity Type</th>
+                                                <th>Name</th>
+                                                <th>URL</th>
+                                                <th>Aim</th>
+                                                <th>Description</th>
+                                                <th>Person of Contact</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        {% for activity in activities%}
+                                        <tr>
+                                            <td>{{activity['AType']}}</td>
+                                            <td>{{activity['ID']}}</td>
+                                            <td>{{activity['AName']}}</td>
+                                            <td>{{activity['Aim']}}</td>
+                                            <td>{{activity['Description']}}</td>
+                                            <td>{{activity['ContactName']}}</td>
+                                            <td>{{activity['ContactEmail']}}</td>
+                                        </tr>
+                  
+                                        {% endfor %}
+
+
+
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                                <td>$320,800</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Garrett Winters</td>
+                                                <td>Accountant</td>
+                                                <td>Tokyo</td>
+                                                <td>63</td>
+                                                <td>2011/07/25</td>
+                                                <td>$170,750</td>
+                                            </tr>
+                                        </tbody>    
+                                       
+                                    </table>
+            </div>
+        </div>
+    
+
+        <form method="POST" action="">
+            {{ filters_form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">New Ticket Form</legend>
+                <div class="form-group">
+                        {{ filters_form.ATypes.label(class="form-control-label") }}
+                        {% if filters_form.ATypes.errors %}
+                            {{ filters_form.ATypes(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in new_ticket_form.ATypes.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ filters_form.ATypes(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                  <div class="form-group">
+                      {{ filters_form.submit(class="btn btn-outline-info") }}
+                  </div> 
+            </fieldset>
+          </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+        <!--Skim through asset types to display the asset-->       
+        {% for Asset_type in Asset_types %}
+
+        <article class="media content-section">
+          <div class="media-body">
+              
+            <div class="article-metadata">
+                <h4><a class="article-title" href="#">{{ Asset_type.ATID }}</a></h4>
+                <div style="width: 20%; float:left">
+                    <img src="{{ Asset_type.ImageUrl }}" alt="{{ Asset_type.ATID }}" style="width:100px;height:100px;padding-top:10px">
+                 </div>
+            </div>
+            <div style="width: 80%; float:right">
+                <p class="article-content">{{ Asset_type.ATDescription }}</p>
+                <p class="article-content">Available Quantity: {{ Asset_type.AvailableQuantity }}</p>
+             </div>
+          </div>
+        </article>
+    {% endfor %}
+        </div>
+        <!--Form to display the asset drop down and request button-->
+    <div class="col-md-4">
+            <div class="content-section">
+                <div class="content-section">
+                    <form method="POST" action="">
+                        {{ request_form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                    {{ request_form.asset.label(class="form-control-label") }}
+                                    {% if request_form.asset.errors %}
+                                        {{ request_form.asset(class="form-control form-control-lg is-invalid") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in request_form.asset.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ request_form.asset(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+                        </fieldset>
+                        <div class="form-group">
+                            {{ request_form.asset_submit(class="btn btn-outline-info") }}
+                        </div> 
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+    </main>
+    <style>
+        button {
+            background: #2e77d2;
+        }
+        .bg-steel{
+            background: #2e77d2;
+        }
+        </style>
+      
+{% endblock content %}
+
+

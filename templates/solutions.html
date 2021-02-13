@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.row{
+
+  margin-left: 130px
+}
+/* Clear floats after the columns */
+
+
+.bg-steel{
+            background: #2e77d2;
+        }
+        button {
+    border: none;
+    width: 100%;
+}
+article.media.content-section {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2%;
+    margin-bottom: 0%;
+   
+}
+.column{
+  background-color: white;
+}
+</style>
+</head>
+<body>
+
+<br>
+
+<div class="row">
+  <!--Create boxes for each category-->
+    {% for record in data %}
+    <div class="column" style="background-color:white;">
+      <button type="button" id="{{record.CID}}" onClick="category_open(this.id,{{data}})"><h2>{{record.Title}}</h2></button>
+      <h6>{{record.AContent}}</h6>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<br>
+<!--Create artitle tite and content for each article in all categroies but hide it-->
+{% for record in data %}
+{% for article in record.Articles %}
+<article class="media content-section"id="Article_list_{{record.CID}}_{{article.ARTID}}" style="display: none" >
+    <div class="media-body">
+        <div align="center">
+            <button type="button" id="{{record.CID}}_{{article.ARTID}}" onClick="article_open(this.id,{{data}})"><h3>{{article.Title}}</h3></button>
+              <br>
+          </div>
+  </div>
+</article>
+{% endfor %}
+{% endfor %}
+
+{% for record in data %}
+{% for article in record.Articles %}
+<article class="media content-section"id="Article_content_{{record.CID}}_{{article.ARTID}}" style="display: none">
+    <div class="media-body">
+        <div align="center">
+            {{article.ArtCont}}
+              <br>
+          </div>
+  </div>
+</article>
+{% endfor %}
+{% endfor %}
+
+<script>
+
+function category_open(clicked_id,data)
+{
+  //Skim through all categories
+  for(i=0;i<data.length;i++){
+    //Hide all open article content
+    for(j=0;j<data[i]["Articles"].length;j++){
+        article=data[i]["Articles"][j]
+        $("#Article_content_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "None")
+      }
+    //HIde article contents if the category ids d not match
+    if(data[i]["CID"]!=clicked_id){
+      for(j=0;j<data[i]["Articles"].length;j++){
+      article=data[i]["Articles"][j]
+      $("#Article_list_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "None");
+      }
+    }
+    //Diaply the article titles if the category ids match
+    else{
+      for(j=0;j<data[i]["Articles"].length;j++){
+        article=data[i]["Articles"][j]
+        $("#Article_list_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "Block");
+      }
+    }
+  }
+}
+
+
+function article_open(clicked_id,data)
+{
+  //Opens the clicked article content hiding all other article title and categories
+  cid=clicked_id.split("_")[0]
+  aid=clicked_id.split("_")[1]
+  //Skim through each category and each article in them to hide them
+  for(i=0;i<data.length;i++){
+    for(j=0;j<data[i]["Articles"].length;j++){
+      article=data[i]["Articles"][j]
+      $("#Article_list_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "None");
+      }
+    //Hide articles and article conetnts from other categories
+    if(data[i]["CID"]!=cid){
+      for(j=0;j<data[i]["Articles"].length;j++){
+        article=data[i]["Articles"][j]
+        $("#Article_content_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "None")
+      }
+    }
+    //if the category ids match
+    else{
+      for(j=0;j<data[i]["Articles"].length;j++){
+        article=data[i]["Articles"][j]
+        //if articles id match, display both the title and content
+        if(aid==article["ARTID"]){
+        $("#Article_list_"+data[i]["CID"]+"_"+article["ARTID"]).css("display", "Block");
+        $("#Article_content_"+cid+"_"+aid).css("display", "Block")
+        }
+        //if they don't match hide the content
+        else{
+        $("#Article_content_"+cid+"_"+article["ARTID"]).css("display", "None")
+        }
+      }
+    }
+  }
+}
+</script>
+
+
+    <style>
+      .boxed {
+  border: 1px solid green ;
+}
+    
+      
+p#relies {
+  display: none;
+}
+.content-section{
+  margin-bottom: 0px;
+}
+
+      </style>
+{% endblock content %}
+
+
+

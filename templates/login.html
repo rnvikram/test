@@ -1,0 +1,39 @@
+{% extends "layout_login.html" %}
+{% block content %}
+    <!--Login form with one text field and a submit button-->
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ login_form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login Details</legend>
+                <div class="form-group">
+                    {{ login_form.eid.label(class="form-control-label") }}
+                    {% if login_form.eid.errors %}
+                        {{ login_form.eid(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in login_form.eid.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ login_form.eid(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ login_form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    <style>
+ 
+    
+    .nav-item{
+    display: none
+    }
+    
+    </style>
+{% endblock content %}
+
+
+

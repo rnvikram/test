@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!--Create article form-->
+  <form method="POST" action="">
+    {{ create_article_form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Create new article</legend>
+        <article class="media content-section">
+            <div class="media-body">
+        <div class="form-group">
+                {{ create_article_form.article_title.label(class="form-control-label") }}
+                {% if create_article_form.article_title.errors %}
+                    {{ create_article_form.article_title(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in create_article_form.article_title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ create_article_form.article_title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+              {{ create_article_form.article_content.label(class="form-control-label") }}
+  
+              {% if create_article_form.article_content.errors %}
+                  {{ create_article_form.article_content(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in create_article_form.username.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ create_article_form.article_content(class="form-control form-control-lg") }}
+              {% endif %}
+          </div>
+          <div class="form-group">
+
+            {{ create_article_form.categories.label(class="form-control-label") }}
+            {{ create_article_form.categories(class="form-control form-control-lg") }}
+            
+        </div>
+          <div class="form-group">
+              {{ create_article_form.asset_submit(class="btn btn-outline-info") }}
+          </div> 
+        </div>
+    </article>
+    </fieldset>
+   
+   <!--Link articles form-->
+    
+  </form>
+  <form method="POST" action="">
+    {{ link_asset.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Link Article to Assete</legend>
+        <article class="media content-section">
+            <div class="media-body">
+      
+            <div class="form-group">
+            {{ link_asset.articles_new.label(class="form-control-label") }}
+            {{ link_asset.articles_new(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ link_asset.assets.label(class="form-control-label") }}
+            {{ link_asset.assets(class="form-control form-control-lg") }}
+            </div>
+         
+          <div class="form-group">
+              {{ link_asset.asset_link(class="btn btn-outline-info") }}
+          </div> 
+        </div>
+    </article>
+    </fieldset>
+  </form>
+
+
+
+{% for assets_request in assets_requests %}
+<article class="media content-section">
+    <div class="media-body">
+                    
+    <div style="width: 40%; float:left" id="properties">
+        <p class="article-content">Request id: #{{ assets_request.NARID }}</p>
+        <p class="article-content">Asset:    {{ assets_request.ATID }}</p>
+        <p class="article-content">Employee Id:  {{ assets_request.Employee.EID }}</p>
+        <p class="article-content">Employee Name:  {{ assets_request.Employee.Name }}</p>
+        <p class="article-content">Employee Team:  {{ assets_request.Employee.Team }}</p>
+     </div>
+
+<div style="width: 20%; float:right">
+
+
+
+<form method="POST" action="">
+    {{ asset_accept_form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class="form-group" style="display: block">
+                {{ asset_accept_form.asset_request_id.label(class="form-control-label") }}
+  
+                {% if asset_accept_form.asset_request_id.errors %}
+                    {{ asset_accept_form.asset_request_id(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in asset_accept_form.asset_request_id.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                <input class="form-control form-control-lg" id="asset_request_id" name="asset_request_id" type="text" value="{{ assets_request.NARID }}">
+                {% endif %}
+            </div>
+            <div class="form-group">
+               
+                {{ asset_accept_form.choice(class="form-control form-control-lg") }}
+                </div>
+          <div class="form-group">
+              {{ asset_accept_form.asset_accept(class="btn btn-outline-info") }}
+          </div> 
+          
+    </fieldset>   
+    
+  </form>
+ </div>
+</div>
+</article>
+
+
+  {% endfor %}
+    <style>
+      body {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+      
+      </style>
+      
+{% endblock content %}
+
+
+
