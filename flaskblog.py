@@ -195,7 +195,7 @@ def support_tickets():
     conn.row_factory = dict_factory
     c = conn.cursor()
     query="SELECT * FROM SupportTicket WHERE EID='{0}'".format(eid)
-    #create addtional filters on  query if a value is choosen in the filters sections
+    #create addtional filters on   query if a value is choosen  in the filters sections
     if status_filter!= None:
         query=query + " AND TStatus='{0}'".format(status_filter)
     if priority_filter!= None:
